@@ -78,18 +78,22 @@ export default function Fornecedores() {
 
   return (
     <DashboardLayout>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-black">🏢 Fornecedores</h1>
-        <button
-          onClick={() => {
-            setIsModalOpen(true);
-            setEditingSupplier(null);
-          }}
-          className="flex items-center bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
-        >
-          <FiPlus className="mr-2" /> Adicionar Fornecedor
-        </button>
-      </div>
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
+  {/* Título */}
+  <h1 className="text-2xl font-bold text-black">🏢 Fornecedores</h1>
+
+  {/* Botão */}
+  <button
+    onClick={() => {
+      setIsModalOpen(true);
+      setEditingSupplier(null);
+    }}
+    className="flex items-center justify-center sm:justify-start bg-green-600 text-white px-4 py-2 rounded shadow hover:bg-green-700 transition transform hover:scale-105 w-full sm:w-auto"
+  >
+    <FiPlus className="mr-2" /> Adicionar Fornecedor
+  </button>
+</div>
+
 
       <div className="mb-4">
         <input

@@ -109,18 +109,23 @@ export default function Vendas() {
   return (
     <DashboardLayout>
       {/* Cabeçalho */}
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-black">💰 Vendas</h1>
-        <button
-          onClick={() => {
-            setEditingSale(null);
-            setIsModalOpen(true);
-          }}
-          className="flex items-center bg-yellow-600 text-white px-4 py-2 rounded shadow-md hover:bg-yellow-700 transition"
-        >
-          <FiPlus className="mr-2" /> Adicionar Venda
-        </button>
-      </div>
+      {/* Cabeçalho */}
+<div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
+  {/* Título */}
+  <h1 className="text-2xl font-bold text-black">💰 Vendas</h1>
+
+  {/* Botão */}
+  <button
+    onClick={() => {
+      setEditingSale(null);
+      setIsModalOpen(true);
+    }}
+    className="flex items-center justify-center sm:justify-start bg-yellow-600 text-white px-4 py-2 rounded shadow-md hover:bg-yellow-700 transition transform hover:scale-105 w-full sm:w-auto"
+  >
+    <FiPlus className="mr-2" /> Adicionar Venda
+  </button>
+</div>
+
 
       {/* Barra de pesquisa */}
       <div className="mb-4">

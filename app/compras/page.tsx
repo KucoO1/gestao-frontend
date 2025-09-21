@@ -19,7 +19,6 @@ export default function Compras() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingPurchase, setEditingPurchase] = useState<Purchase | null>(null);
 
-  // 🔹 Mock inicial
   const [purchases, setPurchases] = useState<Purchase[]>([
     {
       _id: "1",
@@ -39,19 +38,16 @@ export default function Compras() {
     },
   ]);
 
-  // Deletar compra
   const handleDelete = (id: string) => {
     setPurchases((prev) => prev.filter((p) => p._id !== id));
   };
 
-  // Adicionar compra
   const handleAdd = (newPurchase: Purchase) => {
     const withId = { ...newPurchase, _id: Date.now().toString() };
     setPurchases((prev) => [...prev, withId]);
     setIsModalOpen(false);
   };
 
-  // Editar compra
   const handleEdit = (updatedPurchase: Purchase) => {
     setPurchases((prev) =>
       prev.map((p) => (p._id === updatedPurchase._id ? updatedPurchase : p))
@@ -60,7 +56,6 @@ export default function Compras() {
     setIsModalOpen(false);
   };
 
-  // Filtro
   const filteredPurchases = purchases.filter(
     (p) =>
       p.product?.name?.toLowerCase().includes(search.toLowerCase()) ||
@@ -69,18 +64,22 @@ export default function Compras() {
 
   return (
     <DashboardLayout>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-black">🛒 Compras</h1>
-        <button
-          onClick={() => {
-            setEditingPurchase(null);
-            setIsModalOpen(true);
-          }}
-          className="flex items-center bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition transform hover:scale-105"
-        >
-          <FiPlus className="mr-2 text-white" size={20} /> Adicionar Compra
-        </button>
-      </div>
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
+  {/* Título */}
+  <h1 className="text-2xl font-bold text-black">🛒 Compras</h1>
+
+  {/* Botão */}
+  <button
+    onClick={() => {
+      setEditingPurchase(null);
+      setIsModalOpen(true);
+    }}
+    className="flex items-center justify-center sm:justify-start bg-purple-600 text-white px-4 py-2 rounded shadow hover:bg-purple-700 transition transform hover:scale-105 w-full sm:w-auto"
+  >
+    <FiPlus className="mr-2 text-white" size={20} /> Adicionar Compra
+  </button>
+</div>
+
 
       <div className="mb-4">
         <input
@@ -93,32 +92,29 @@ export default function Compras() {
       </div>
 
       {filteredPurchases.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredPurchases.map((purchase) => (
             <div
               key={purchase._id}
-              className="bg-white p-4 rounded shadow hover:shadow-lg transition relative"
+              className="bg-white p-4 rounded shadow hover:shadow-lg transition relative flex flex-col justify-between"
             >
-              {/* Produto sempre preto */}
-              <h2 className="font-bold text-lg mb-2 text-black">
-                {purchase.product?.name || "Produto não encontrado"}
-              </h2>
-
-              {/* Fornecedor sempre preto */}
-              <p className="text-black font-medium">
-                Fornecedor: {purchase.supplier?.name || "Fornecedor não encontrado"}
-              </p>
-
-              <p className="text-gray-600">Quantidade: {purchase.quantity}</p>
-              <p className="text-gray-600">
-                Preço Total: Kz {purchase.quantity * purchase.price}
-              </p>
-              <p className="text-gray-600">
-                Data: {new Date(purchase.date).toLocaleDateString("pt-BR")}
-              </p>
+              <div>
+                <h2 className="font-bold text-lg mb-1 text-black break-words">
+                  {purchase.product?.name || "Produto não encontrado"}
+                </h2>
+                <p className="text-black font-medium break-words">
+                  Fornecedor: {purchase.supplier?.name || "Fornecedor não encontrado"}
+                </p>
+                <p className="text-gray-600">Quantidade: {purchase.quantity}</p>
+                <p className="text-gray-600">
+                  Preço Total: Kz {purchase.quantity * purchase.price}
+                </p>
+                <p className="text-gray-600">
+                  Data: {new Date(purchase.date).toLocaleDateString("pt-BR")}
+                </p>
+              </div>
 
               <div className="flex justify-end mt-4 space-x-3">
-                {/* Editar com azul vivo */}
                 <button
                   className="text-blue-600 hover:text-blue-800 transition-transform transform hover:scale-110"
                   onClick={() => {
@@ -128,8 +124,6 @@ export default function Compras() {
                 >
                   <FiEdit size={22} />
                 </button>
-
-                {/* Deletar com vermelho vivo */}
                 <button
                   onClick={() => handleDelete(purchase._id)}
                   className="text-red-600 hover:text-red-800 transition-transform transform hover:scale-110"
@@ -144,7 +138,6 @@ export default function Compras() {
         <p className="text-gray-500 mt-6">Nenhuma compra encontrada.</p>
       )}
 
-      {/* Modal */}
       <CompraModal
         isOpen={isModalOpen}
         onClose={() => {

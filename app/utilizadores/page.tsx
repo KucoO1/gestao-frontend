@@ -68,18 +68,23 @@ export default function Usuarios() {
   return (
     <DashboardLayout>
       {/* Cabeçalho */}
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-black">👥 Usuários</h1>
-        <button
-          onClick={() => {
-            setEditingUser(null);
-            setIsModalOpen(true);
-          }}
-          className="flex items-center bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition"
-        >
-          <FiPlus className="mr-2" /> Adicionar Usuário
-        </button>
-      </div>
+      {/* Cabeçalho */}
+<div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
+  {/* Título */}
+  <h1 className="text-2xl font-bold text-black">👥 Usuários</h1>
+
+  {/* Botão */}
+  <button
+    onClick={() => {
+      setEditingUser(null);
+      setIsModalOpen(true);
+    }}
+    className="flex items-center justify-center sm:justify-start bg-indigo-600 text-white px-4 py-2 rounded shadow-md hover:bg-indigo-700 transition transform hover:scale-105 w-full sm:w-auto"
+  >
+    <FiPlus className="mr-2" /> Adicionar Usuário
+  </button>
+</div>
+
 
       {/* Barra de pesquisa */}
       <div className="mb-4">

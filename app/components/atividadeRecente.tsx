@@ -1,5 +1,3 @@
-"use client";
-
 import { ArrowDownRight, ArrowUpRight, Package } from "lucide-react";
 
 interface Activity {
@@ -25,7 +23,7 @@ const activities: Activity[] = [
   {
     id: 2,
     title: "Notebook Lenovo ThinkPad",
-    amount: "kz8,400",
+    amount: "KZ8,400",
     quantity: "12x",
     source: "Venda Online",
     type: "saida",
@@ -43,7 +41,7 @@ const activities: Activity[] = [
   {
     id: 4,
     title: "Cabo USB-C",
-    amount: "kz125",
+    amount: "KZ125",
     quantity: "5x",
     source: "Stock Baixo",
     type: "alerta",
@@ -53,38 +51,39 @@ const activities: Activity[] = [
 
 export default function RecentActivity() {
   return (
-    <div className="bg-white p-4 rounded-2xl shadow-sm border">
-      <h2 className="text-lg font-semibold mb-4">Atividade Recente</h2>
-      <div className="space-y-3">
+    <div className="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border">
+      <h2 className="text-lg sm:text-xl font-semibold mb-4">Atividade Recente</h2>
+
+      <div className="flex flex-col gap-3">
         {activities.map((activity) => (
           <div
             key={activity.id}
-            className="flex items-center justify-between p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition"
+            className="flex flex-col sm:flex-row sm:justify-between sm:items-center p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition"
           >
-            {/* Ícone */}
-            <div className="flex items-center gap-3">
+            {/* Ícone + Info */}
+            <div className="flex items-center gap-3 flex-1 min-w-0">
               {activity.type === "entrada" && (
-                <ArrowUpRight className="text-green-500" size={20} />
+                <ArrowUpRight className="text-green-500 h-5 w-5 flex-shrink-0" />
               )}
               {activity.type === "saida" && (
-                <ArrowDownRight className="text-red-500" size={20} />
+                <ArrowDownRight className="text-red-500 h-5 w-5 flex-shrink-0" />
               )}
               {activity.type === "alerta" && (
-                <Package className="text-yellow-500" size={20} />
+                <Package className="text-yellow-500 h-5 w-5 flex-shrink-0" />
               )}
 
-              <div>
-                <p className="font-medium">{activity.title}</p>
-                <p className="text-sm text-gray-500">
+              <div className="truncate">
+                <p className="font-medium truncate">{activity.title}</p>
+                <p className="text-sm text-gray-500 truncate">
                   {activity.quantity} • {activity.source}
                 </p>
               </div>
             </div>
 
             {/* Valor + Status + Tempo */}
-            <div className="text-right">
+            <div className="flex flex-col sm:items-end mt-2 sm:mt-0 gap-1">
               <p className="font-semibold">{activity.amount}</p>
-              <div className="flex items-center gap-2 justify-end">
+              <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 justify-start sm:justify-end">
                 {activity.type === "entrada" && (
                   <span className="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-700">
                     entrada

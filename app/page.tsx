@@ -59,87 +59,93 @@ export default function DashboardPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-6 space-y-6">
-        <h1 className="text-2xl font-bold">📊 Dashboard</h1>
+  <div className="p-4 sm:p-6 space-y-6">
+    <h1 className="text-xl sm:text-2xl font-bold">📊 Dashboard</h1>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Produtos</CardTitle>
-              <Package className="h-5 w-5 text-blue-500" />
-            </CardHeader>
-            <CardContent>
-              <p className="text-2xl font-bold">{cards.produtos}</p>
-              <p className="text-xs text-muted-foreground">Total cadastrados</p>
-            </CardContent>
-          </Card>
+    {/* Cards */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      {/** Cada Card */}
+      <Card className="min-w-0">
+        <CardHeader className="flex flex-row items-center justify-between pb-2">
+          <CardTitle className="text-sm sm:text-base font-medium">Produtos</CardTitle>
+          <Package className="h-5 w-5 text-blue-500" />
+        </CardHeader>
+        <CardContent>
+          <p className="text-xl sm:text-2xl font-bold">{cards.produtos}</p>
+          <p className="text-xs text-muted-foreground">Total cadastrados</p>
+        </CardContent>
+      </Card>
 
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Fornecedores</CardTitle>
-              <Users className="h-5 w-5 text-green-500" />
-            </CardHeader>
-            <CardContent>
-              <p className="text-2xl font-bold">{cards.fornecedores}</p>
-              <p className="text-xs text-muted-foreground">Parceiros ativos</p>
-            </CardContent>
-          </Card>
+      <Card className="min-w-0">
+        <CardHeader className="flex flex-row items-center justify-between pb-2">
+          <CardTitle className="text-sm sm:text-base font-medium">Fornecedores</CardTitle>
+          <Users className="h-5 w-5 text-green-500" />
+        </CardHeader>
+        <CardContent>
+          <p className="text-xl sm:text-2xl font-bold">{cards.fornecedores}</p>
+          <p className="text-xs text-muted-foreground">Parceiros ativos</p>
+        </CardContent>
+      </Card>
 
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Vendas</CardTitle>
-              <ShoppingCart className="h-5 w-5 text-orange-500" />
-            </CardHeader>
-            <CardContent>
-              <p className="text-2xl font-bold">{cards.vendas}</p>
-              <p className="text-xs text-muted-foreground">No último mês</p>
-            </CardContent>
-          </Card>
+      <Card className="min-w-0">
+        <CardHeader className="flex flex-row items-center justify-between pb-2">
+          <CardTitle className="text-sm sm:text-base font-medium">Vendas</CardTitle>
+          <ShoppingCart className="h-5 w-5 text-orange-500" />
+        </CardHeader>
+        <CardContent>
+          <p className="text-xl sm:text-2xl font-bold">{cards.vendas}</p>
+          <p className="text-xs text-muted-foreground">No último mês</p>
+        </CardContent>
+      </Card>
 
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium">Relatórios</CardTitle>
-              <BarChart3 className="h-5 w-5 text-purple-500" />
-            </CardHeader>
-            <CardContent>
-              <p className="text-2xl font-bold">{cards.relatorios}</p>
-              <p className="text-xs text-muted-foreground">Gerados este mês</p>
-            </CardContent>
-          </Card>
-        </div>
+      <Card className="min-w-0">
+        <CardHeader className="flex flex-row items-center justify-between pb-2">
+          <CardTitle className="text-sm sm:text-base font-medium">Relatórios</CardTitle>
+          <BarChart3 className="h-5 w-5 text-purple-500" />
+        </CardHeader>
+        <CardContent>
+          <p className="text-xl sm:text-2xl font-bold">{cards.relatorios}</p>
+          <p className="text-xs text-muted-foreground">Gerados este mês</p>
+        </CardContent>
+      </Card>
+    </div>
 
-        {/* Gráfico */}
-        <Card className="p-6 shadow-md">
-          <h2 className="text-xl font-bold mb-4">Vendas Mensais</h2>
-          <ResponsiveContainer width="100%" height={350}>
-            <AreaChart data={vendasMensais}>
-              <defs>
-                <linearGradient id="colorVendas" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#4F46E5" stopOpacity={0.8} />
-                  <stop offset="95%" stopColor="#4F46E5" stopOpacity={0} />
-                </linearGradient>
-              </defs>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="mes" />
-              <YAxis />
-              <Tooltip />
-              <Area
-                type="monotone"
-                dataKey="vendas"
-                stroke="#4F46E5"
-                strokeWidth={3}
-                fillOpacity={1}
-                fill="url(#colorVendas)"
-              />
-            </AreaChart>
-          </ResponsiveContainer>
-        </Card>
-
-        {/* Componentes adicionais */}
-        <StockAlerts />
-        <RecentActivity />
+    {/* Gráfico */}
+    <Card className="shadow-md p-4 sm:p-6 w-full">
+      <h2 className="text-lg sm:text-xl font-bold mb-4">Vendas Mensais</h2>
+      <div className="w-full h-64 sm:h-80 md:h-96">
+        <ResponsiveContainer width="100%" height="100%">
+          <AreaChart data={vendasMensais}>
+            <defs>
+              <linearGradient id="colorVendas" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#4F46E5" stopOpacity={0.8}/>
+                <stop offset="95%" stopColor="#4F46E5" stopOpacity={0}/>
+              </linearGradient>
+            </defs>
+            <CartesianGrid strokeDasharray="3 3"/>
+            <XAxis dataKey="mes"/>
+            <YAxis/>
+            <Tooltip/>
+            <Area
+              type="monotone"
+              dataKey="vendas"
+              stroke="#4F46E5"
+              strokeWidth={3}
+              fillOpacity={1}
+              fill="url(#colorVendas)"
+            />
+          </AreaChart>
+        </ResponsiveContainer>
       </div>
-    </DashboardLayout>
+    </Card>
+
+    {/* Componentes adicionais */}
+    <div className="space-y-6">
+      <StockAlerts  />
+      <RecentActivity  />
+    </div>
+  </div>
+</DashboardLayout>
+
   );
 }
